@@ -1,15 +1,132 @@
 <!doctype html>
 <html>
 <head>
+	<meta charset="utf-8" />
 	<title>ABC Logic</title>
 	<link rel="stylesheet" href="normalize.css" type="text/css" />
 	<link rel="stylesheet" href="styles.css" type="text/css" />
 	<script type="text/javascript" src="abc.js"></script>
 </head>
-<body class="loading">
-	<main id="display">
-	</main>
+<body>
+	<template id="grid-template">
+		<div class="grid">
+			<div class="row">
+				<div class="cell edge" data-coords="00"></div>
+				<div class="cell edge" data-coords="01"></div>
+				<div class="cell edge" data-coords="02"></div>
+				<div class="cell edge" data-coords="03"></div>
+				<div class="cell edge" data-coords="04"></div>
+				<div class="cell edge" data-coords="05"></div>
+				<div class="cell edge" data-coords="06"></div>
+			</div>
+			<div class="row">
+				<div class="cell edge" data-coords="10"></div>
+				<div class="cell tile" data-coords="11"></div>
+				<div class="cell tile" data-coords="12"></div>
+				<div class="cell tile" data-coords="13"></div>
+				<div class="cell tile" data-coords="14"></div>
+				<div class="cell tile" data-coords="15"></div>
+				<div class="cell edge" data-coords="16"></div>
+			</div>
+			<div class="row">
+				<div class="cell edge" data-coords="20"></div>
+				<div class="cell tile" data-coords="21"></div>
+				<div class="cell tile" data-coords="22"></div>
+				<div class="cell tile" data-coords="23"></div>
+				<div class="cell tile" data-coords="24"></div>
+				<div class="cell tile" data-coords="25"></div>
+				<div class="cell edge" data-coords="26"></div>
+			</div>
+			<div class="row">
+				<div class="cell edge" data-coords="30"></div>
+				<div class="cell tile" data-coords="31"></div>
+				<div class="cell tile" data-coords="32"></div>
+				<div class="cell tile" data-coords="33"></div>
+				<div class="cell tile" data-coords="34"></div>
+				<div class="cell tile" data-coords="35"></div>
+				<div class="cell edge" data-coords="36"></div>
+			</div>
+			<div class="row">
+				<div class="cell edge" data-coords="40"></div>
+				<div class="cell tile" data-coords="41"></div>
+				<div class="cell tile" data-coords="42"></div>
+				<div class="cell tile" data-coords="43"></div>
+				<div class="cell tile" data-coords="44"></div>
+				<div class="cell tile" data-coords="45"></div>
+				<div class="cell edge" data-coords="46"></div>
+			</div>
+			<div class="row">
+				<div class="cell edge" data-coords="50"></div>
+				<div class="cell tile" data-coords="51"></div>
+				<div class="cell tile" data-coords="52"></div>
+				<div class="cell tile" data-coords="53"></div>
+				<div class="cell tile" data-coords="54"></div>
+				<div class="cell tile" data-coords="55"></div>
+				<div class="cell edge" data-coords="56"></div>
+			</div>
+			<div class="row">
+				<div class="cell edge" data-coords="60"></div>
+				<div class="cell edge" data-coords="61"></div>
+				<div class="cell edge" data-coords="62"></div>
+				<div class="cell edge" data-coords="63"></div>
+				<div class="cell edge" data-coords="64"></div>
+				<div class="cell edge" data-coords="65"></div>
+				<div class="cell edge" data-coords="66"></div>
+			</div>
+		</div>
+	</template>
 	<footer>
+		<button>A</button>
+		<button>B</button>
+		<button>C</button>
+		<button title="Mark as blank">✘</button>
+		<button title="Mark as unknown">?</button>
 	</footer>
+	<button id="toggle-help">Help</button>
+	<aside id="help">
+		<h1>How to play</h1>
+		<h2 id='rules'>Rules</h2>
+		<p>
+			<a href="https://en.wikipedia.org/wiki/Buchstabensalat_(logic_puzzle)">ABC Logic</a> is a single-player logic puzzle game.
+			It takes place on a square grid, where some rows and columns are annotated with letters.
+			The objective is to fill the grid with the letters <strong>A</strong>, <strong>B</strong>, <strong>C</strong> such that:
+		</p>
+		<ul>
+			<li>Each column contains each letter exactly once.</li>
+			<li>Each row    contains each letter exactly once.</li>
+			<li>An annotated letter to the left of a row is the first letter in that row. Similarly, a letter to the right of a row is the last letter of that row.</li>
+			<li>An annotated letter above a column is the first letter in that column. Similarly, a letter below a column is the last letter of that row.</li>
+		</ul>
+
+		<h2>Example</h2>
+		<figure id="example" data-top=" B AC", data-left="AA  C", data-right="CC CA", data-bottom="B A A">
+			<figcaption>
+				The top row of the grid below must begin with an <strong>A</strong> and end with a <strong>C</strong>.
+				The bottom row is the other way round: starting with a <strong>C</strong> and ending with a <strong>A</strong>.
+				Finally, the leftmost column's must end with a <strong>B</strong>; its initial element is left unspecified.
+				Notice that the lower-left cell has to be blank, as it cannot be an <strong>A</strong>, a <strong>B</strong> nor a <strong>C</strong>.
+			</figcaption>
+			<!--The grid is inserted by Javascript.-->
+		</figure>
+
+		<h2>Notation</h2>
+		<p>
+			If we determine that a square contains a letter, we mark it with that letter.
+			If we don't know what a square contains, we leave it blank.
+			If we are certain that the square doesn't contain a letter, we mark it with a <span title="cross mark">✘</span>.
+		</p>
+
+		<p>If a mistake is made—i.e. if one of the <a href='#rules'>rules above</a> is broken—then the problem row or column will be highlighted <span class="error">in red</span>.</p>
+
+		<h2>Controls</h2>
+		<p>
+			Click or tap on a given cell to select it.
+			Keyboard users can navigate using the <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> keys.
+		</p>
+		<p>
+			Use the buttons at the bottom of the page to mark the cell as <button>A</button>, <button>B</button>, <button>C</button>, blank (<button>✘</button>) or unknown (<button>?</button>).
+			Keyboard users can do the same using the <kbd>A</kbd>, <kbd>B</kbd>, <kbd>C</kbd>, <kbd>X</kbd> and keys and the <kbd>spacebar</kbd>, respectively.
+		</p>
+	</aside>
 </body>
 </html>

@@ -1,25 +1,86 @@
+/* Aligning the main components */
+
 body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	height: 100vh;
+}
+
+.loading {
+	display: none;
+}
+
+.grid.main {
+	width: 85vmin;
+	height: 85vmin;
 	font-size: 7vmin;
 }
 
-main {
-	width: 85vmin;
-	height: 85vmin;
-	text-align: center;
-	margin-bottom: 2vmin;
-	display: table;
+.main .cell {
+	width: 12vmin;
+	height: 12vmin;
+	border-width: 0.2vmin;
 }
 
 footer {
 	width: 85vmin;
-	height: 10vmin;
-	background: #6699cc;
-	margin-top: 0.2vmin;
+	height: 8vmin;
+	margin-top: 2vmin;
+	padding: 1vmin 0;
+	font-size: 4.5vmin;
+	width: 100%;
+	text-align: center;
+}
+
+footer button {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0.05em;
+	min-width: 9vmin;
+	height: 100%;
+	margin: 0 0.5vmin;
+}
+
+/* Help-section */
+aside {
+	padding: 1em;
+}
+
+#toggle-help {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	font-size: 3vmin;
+}
+
+/* Styles for toggling the help section */
+aside, .show-help .main, .show-help footer {
+	display: none;
+}
+
+.show-help, .show-help aside {
+	display: block;
+}
+
+kbd { /* Nicked from stack exchange */
+	display: inline-block;
+	margin: 0 .1em;
+	padding: .1em .6em;
+	line-height: 1.4;
+	color: #3a3d41;
+	background-color: #f2f2f2;
+	border: 1px solid #c7cacd;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 rgba(34,36,38,0.2),0 0 0 2px #FFF inset;
+}
+
+/* The grid */
+.grid {
+	text-align: center;
+	display: table;
+	margin: auto;
 }
 
 .row {
@@ -27,15 +88,28 @@ footer {
 }
 
 .cell {
+	width: 2em;
+	height: 2em;
 	display: table-cell;
-	width: 12vmin;
-	height: 12vmin;
 	vertical-align: middle;
-	border: 0.1vmin solid transparent;
 	box-sizing: border-box;
+	border-style: solid;
+	border-color: transparent;
+	border-width: 1px;
 }
 
-.grid {
+.edge { font-weight: bold; }
+
+.tile { /* central 25 tiles */
 	background: #eaeaea;
 	border-color: #aaa;
 }
+
+.error {
+	background: ;
+}
+
+.cell[data-value='A']::before { content: 'A'; }
+.cell[data-value='B']::before { content: 'B'; }
+.cell[data-value='C']::before { content: 'C'; }
+.cell[data-value='blank']::before { content: '✘'; color: rgba(0, 0, 0, 0.3); }
