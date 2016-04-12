@@ -105,8 +105,12 @@ kbd { /* Nicked from stack exchange */
 	border-color: #aaa;
 }
 
+.selected {
+	box-shadow: rgba(0, 255, 0, 0.2) 0 0 10px 5px inset;
+}
+
 .error {
-	background: ;
+	background: red;
 }
 
 .cell[data-value='A']::before { content: 'A'; }
