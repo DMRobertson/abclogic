@@ -1,0 +1,41 @@
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+	font-size: 7vmin;
+}
+
+main {
+	width: 85vmin;
+	height: 85vmin;
+	text-align: center;
+	margin-bottom: 2vmin;
+	display: table;
+}
+
+footer {
+	width: 85vmin;
+	height: 10vmin;
+	background: #6699cc;
+	margin-top: 0.2vmin;
+}
+
+.row {
+	display: table-row;
+}
+
+.cell {
+	display: table-cell;
+	width: 12vmin;
+	height: 12vmin;
+	vertical-align: middle;
+	border: 0.1vmin solid transparent;
+	box-sizing: border-box;
+}
+
+.grid {
+	background: #eaeaea;
+	border-color: #aaa;
+}
