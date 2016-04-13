@@ -1,4 +1,4 @@
-function ABC() {
+function ABC () {
 	this.size = 5;
 	this.selected = null;
 
@@ -20,9 +20,9 @@ ABC.prototype = {
 	},
 	add_event_listeners: function () {
 		var bound = this.cell_click.bind(this);
-		for (var i=0; i < this.cells.length; i++) {
-			for (var j=0; j < this.cells.length; j++) {
-				this.cells[i][j].addEventListener("click", bound);
+		for (var i = 0; i < this.cells.length; i++) {
+			for (var j = 0; j < this.cells.length; j++) {
+				this.cells[i][j].addEventListener('click', bound);
 			}
 		}
 
@@ -88,23 +88,19 @@ ABC.prototype = {
 		} else {
 			list.add('show-help');
 			event.target.innerText = 'Close';
-		};
+		}
 	},
 	cell_click: function (event) {
-		if (event.button !== 0){
-			return
+		if (event.button !== 0) {
+			return;
 		}
-		if (this.selected !== null){
-			this.selected.classList.remove('selected')
+		if (this.selected !== null) {
+			this.selected.classList.remove('selected');
 		}
 		this.selected = event.target;
 		this.selected.classList.add('selected');
-	},
-}
-
-
-
-
+	}
+};
 
 function main () {
 	var abc = new ABC();

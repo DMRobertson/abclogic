@@ -25,12 +25,10 @@ body {
 }
 
 footer {
-	width: 85vmin;
 	height: 8vmin;
 	margin-top: 2vmin;
 	padding: 1vmin 0;
 	font-size: 4.5vmin;
-	width: 100%;
 	text-align: center;
 }
 
@@ -56,24 +54,27 @@ aside {
 }
 
 /* Styles for toggling the help section */
-aside, .show-help .main, .show-help footer {
+aside,
+.show-help .main,
+.show-help footer {
 	display: none;
 }
 
-.show-help, .show-help aside {
+.show-help,
+.show-help aside {
 	display: block;
 }
 
 kbd { /* Nicked from stack exchange */
 	display: inline-block;
-	margin: 0 .1em;
-	padding: .1em .6em;
+	margin: 0 0.1em;
+	padding: 0.1em 0.6em;
 	line-height: 1.4;
 	color: #3a3d41;
 	background-color: #f2f2f2;
 	border: 1px solid #c7cacd;
 	border-radius: 3px;
-	box-shadow: 0 1px 0 rgba(34,36,38,0.2),0 0 0 2px #FFF inset;
+	box-shadow: 0 1px 0 rgba(34, 36, 38, 0.2) 0 0 0 2px #fff inset;
 }
 
 /* The grid */
@@ -116,4 +117,8 @@ kbd { /* Nicked from stack exchange */
 .cell[data-value='A']::before { content: 'A'; }
 .cell[data-value='B']::before { content: 'B'; }
 .cell[data-value='C']::before { content: 'C'; }
-.cell[data-value='blank']::before { content: '✘'; color: rgba(0, 0, 0, 0.3); }
+
+.cell[data-value='blank']::before {
+	content: '✘';
+	color: rgba(0, 0, 0, 0.3);
+}
