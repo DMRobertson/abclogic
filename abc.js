@@ -1,3 +1,8 @@
+function mod (n, m) {
+	// always returns in the range [0, m)
+	return ((n % m) + m) % m;
+}
+
 function ABC () {
 	this.size = 5;
 	this.selected = null;
@@ -28,6 +33,14 @@ ABC.prototype = {
 
 		document.getElementById('toggle-help')
 			.addEventListener('click', this.toggle_help.bind(this));
+
+		var bound = this.button_click.bind(this);
+		var buttons = document.querySelectorAll('footer button');
+		for (var i = 0; i < buttons.length; i++) {
+			buttons[i].addEventListener('click', bound);
+		}
+
+		this.body.addEventListener('keydown', this.key_down.bind(this));
 	},
 
 	// utilities
@@ -94,11 +107,53 @@ ABC.prototype = {
 		if (event.button !== 0) {
 			return;
 		}
+		this.set_selected(event.target);
+	},
+	set_selected: function (cell) {
 		if (this.selected !== null) {
 			this.selected.classList.remove('selected');
 		}
-		this.selected = event.target;
+		this.selected = cell;
 		this.selected.classList.add('selected');
+	},
+	button_click: function (event) {
+		this.mark_selected(event.target.dataset.value);
+	},
+	mark_selected: function (value) {
+		this.selected.dataset.value = value;
+	},
+	key_down: function (event) {
+		var coords = [
+			parseInt(this.selected.dataset.coords[0], 10),
+			parseInt(this.selected.dataset.coords[1], 10)
+		];
+		switch (event.code) {
+			case 'ArrowUp':
+				this.set_selected(this.cells[mod(coords[0] - 2, this.size)][coords[1] - 1]);
+				break;
+			case 'ArrowDown':
+				this.set_selected(this.cells[mod(coords[0], this.size)][coords[1] - 1]);
+				break;
+			case 'ArrowLeft':
+				this.set_selected(this.cells[coords[0] - 1][mod(coords[1] - 2, this.size)]);
+				break;
+			case 'ArrowRight':
+				this.set_selected(this.cells[coords[0] - 1][mod(coords[1], this.size)]);
+				break;
+			case 'KeyA':
+			case 'KeyB':
+			case 'KeyC':
+			case 'KeyX':
+				console.info(event.keyCode);
+				this.mark_selected(String.fromCharCode(event.keyCode).toUpperCase());
+				break;
+			case 'Space':
+			case 'Delete':
+				this.mark_selected('');
+				break;
+			default:
+		}
+
 	}
 };
 

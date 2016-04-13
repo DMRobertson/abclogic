@@ -118,7 +118,7 @@ kbd { /* Nicked from stack exchange */
 .cell[data-value='B']::before { content: 'B'; }
 .cell[data-value='C']::before { content: 'C'; }
 
-.cell[data-value='blank']::before {
+.cell[data-value='X']::before {
 	content: '✘';
 	color: rgba(0, 0, 0, 0.3);
 }
